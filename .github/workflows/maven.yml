@@ -47,9 +47,10 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
-
-    - uses: rubenmoreirafs/academy/.github/actions/maven_build@main
-    - uses: rubenmoreirafs/academy/.github/actions/docker_build@main
+    - name: run maven build
+      uses: rubenmoreirafs/academy/.github/actions/maven_build@main
+    - name: run docker build
+      uses: rubenmoreirafs/academy/.github/actions/docker_build@main
       with:
         dockerfile_path: './src/main/docker/Dockerfile.jvm'  # input-name: dockerfile_path
         image_name: 'my-custom-image'                        # input-name: image_name
