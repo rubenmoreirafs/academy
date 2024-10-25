@@ -49,9 +49,8 @@ jobs:
         cache: maven
 
     - uses: rubenmoreirafs/academy/.github/actions/maven_build@main
+    - uses: rubenmoreirafs/academy/.github/actions/docker_build@main
 
-    - name: Run docker file
-      run: docker build . --file ./src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
 
 
 
