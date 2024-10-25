@@ -17,8 +17,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Docker Hub image that `container-job` executes in
-    container: node:20-bookworm-slim
     # Service containers to run with `container-job`
     services:
       # Label used to access the service container
@@ -35,23 +33,16 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-    - uses: actions/checkout@v4
-    # Performs a clean installation of all dependencies in the `package.json` file
-    # For more information, see https://docs.npmjs.com/cli/ci.html
-    - name: Install dependencies
-      run: npm ci
-
-    - name: Connect to PostgreSQL
-      # Runs a script that creates a PostgreSQL table, populates
-      # the table with data, and then retrieves the data.
-      run: node client.js
-
+    - uses: actions/checkout@v
       # Environment variables used by the `client.js` script to create a new PostgreSQL table.
       env:
         # The hostname used to communicate with the PostgreSQL service container
         POSTGRES_HOST: postgres
+        POSTGRES_USER: postgresuser
+        POSTGRES_PASSWORD: mysecretpassword
+        POSTGRES_DB: postgres
         # The default PostgreSQL port
-        POSTGRES_PORT: 5432
+        POSTGRES_PORT: 5432:5432
     - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
