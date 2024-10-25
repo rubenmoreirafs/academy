@@ -37,7 +37,6 @@ jobs:
       # Environment variables used by the `client.js` script to create a new PostgreSQL table.
       env:
         # The hostname used to communicate with the PostgreSQL service container
-        POSTGRES_HOST: postgres
         POSTGRES_USER: postgresuser
         POSTGRES_PASSWORD: mysecretpassword
         POSTGRES_DB: postgres
