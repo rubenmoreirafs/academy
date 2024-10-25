@@ -25,9 +25,11 @@ runs:
         else
           echo "TAG=${{ inputs.tag_name }}" >> $GITHUB_ENV
         fi
-        echo "DOCKER_IMAGE_NAME=${{ inputs.image_name }}:${{ env.TAG }}" >> $GITHUB_ENV
       shell: bash
-
+    - name: Set DOCKER_IMAGE_NAME environment variable
+      run: |
+        echo "DOCKER_IMAGE_NAME=${{ inputs.image_name }}:$TAG" >> $GITHUB_ENV
+      shell: bash
     - name: Build Docker image
       run: |
         docker build -t ${{ env.DOCKER_IMAGE_NAME }} -f ${{ inputs.dockerfile_path }} .
